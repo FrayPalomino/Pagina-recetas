@@ -1,0 +1,27 @@
+baseURL = 'http://localhost:1313'
+languageCode = 'es'
+title = 'Sabores del Perú'
+theme = ''
+
+[params]
+  description = "Descubre los sabores auténticos de la cocina peruana"
+  author = "Sabores del Perú"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[menu]
+  [[menu.main]]
+    name = "Inicio"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Recetas"
+    url = "/recetas/"
+    weight = 2
+
+[taxonomies]
+  categoria = "categorias"
+  tag = "tags"

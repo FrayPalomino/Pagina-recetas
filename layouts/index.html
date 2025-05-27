@@ -1,0 +1,68 @@
+{{ define "main" }}
+<main class="container">
+    <br>
+    
+    <section class="filters">
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="entrada">Entradas</button>
+            <button class="filter-btn" data-filter="caldo">Caldos</button>
+            <button class="filter-btn" data-filter="principal">Platos Fuertes</button>
+            <button class="filter-btn" data-filter="postre">Postres</button>
+            <button class="filter-btn" data-filter="bebida">Bebidas</button>
+        </div>
+    </section>
+
+    <section id="dishes-container" class="dishes-grid">
+        {{ range .Site.Data.recetas }}
+        <div class="dish-card" data-id="{{ .id }}" data-categoria="{{ .categoria }}">
+            <img src="{{ .imagen }}" alt="{{ .nombre }}" class="dish-image">
+            <div class="dish-info">
+                <h3 class="dish-title">{{ .nombre }}</h3>
+                <div class="dish-category" data-category="{{ .categoria }}">
+                    {{ if eq .categoria "entrada" }}Entrada{{ end }}
+                    {{ if eq .categoria "caldo" }}Caldo{{ end }}
+                    {{ if eq .categoria "principal" }}Plato Fuerte{{ end }}
+                    {{ if eq .categoria "postre" }}Postre{{ end }}
+                    {{ if eq .categoria "bebida" }}Bebida{{ end }}
+                </div>
+                <p class="dish-description">{{ .descripcion }}</p>
+            </div>
+        </div>
+        {{ end }}
+    </section>
+</main>
+
+<!-- Modal -->
+<div id="dish-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="modal-body">
+            <div class="modal-image-container">
+                <img id="modal-image" src="/placeholder.svg" alt="">
+            </div>
+            <div class="modal-details">
+                <div class="modal-header">
+                    <h2 id="modal-title"></h2>
+                    <button id="play-button" aria-label="Reproducir audio">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </div>
+                <div class="modal-category"></div>
+                <div class="modal-description"></div>
+                
+                <h3>Ingredientes</h3>
+                <ul id="modal-ingredients"></ul>
+                
+                <h3>Preparación</h3>
+                <ol id="modal-preparation"></ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script para pasar datos a JavaScript -->
+<script>
+window.recetasData = {{ .Site.Data.recetas | jsonify | safeJS }};
+</script>
+{{ end }}
