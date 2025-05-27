@@ -1,7 +1,7 @@
-baseURL = 'http://localhost:1313'
+baseURL = 'https://pagina-recetas.vercel.app'
 languageCode = 'es'
 title = 'Sabores del Perú'
-theme = ''
+publishDir = "public"
 
 [params]
   description = "Descubre los sabores auténticos de la cocina peruana"
